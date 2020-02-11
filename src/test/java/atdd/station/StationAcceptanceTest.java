@@ -1,5 +1,6 @@
 package atdd.station;
 
+import atdd.station.model.request.StationCreateRequest;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,14 +23,15 @@ public class StationAcceptanceTest {
 
     @Test
     public void createStation() {
-        String stationName = "강남역";
-        String inputJson = "{\"name\":\""+stationName+"\"}";
+        StationCreateRequest stationCreateRequest = StationCreateRequest.builder()
+                .name("강남역")
+                .build();
 
         webTestClient.post().uri("/stations")
             .contentType(MediaType.APPLICATION_JSON)
-                    .body(Mono.just(inputJson), String.class)
-                    .exchange()
-                    .expectStatus().isCreated()
-                    .expectHeader().exists("Location");
+            .body(Mono.just(stationCreateRequest), StationCreateRequest.class)
+            .exchange()
+            .expectStatus().isCreated()
+            .expectHeader().exists("Location");
     }
 }

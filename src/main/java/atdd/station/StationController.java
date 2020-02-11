@@ -1,5 +1,6 @@
 package atdd.station;
 
+import atdd.station.model.request.StationCreateRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class StationController {
 
     @PostMapping("")
-    public ResponseEntity<String> createStations() {
+    public ResponseEntity<String> createStations(@RequestBody StationCreateRequest stationCreateRequest) {
 
         return ResponseEntity.created(URI.create("/stations")).build();
     }
