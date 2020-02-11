@@ -11,9 +11,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class StationApiResponse {
+public class StationApiResponse<T> {
 
-    private Long id;
-
-    private String name;
+    private T data;
 }
