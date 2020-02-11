@@ -1,6 +1,7 @@
 package atdd.station;
 
 import atdd.station.model.request.StationCreateRequest;
+import atdd.station.model.response.StationApiResponse;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
@@ -32,6 +34,8 @@ public class StationAcceptanceTest {
             .body(Mono.just(stationCreateRequest), StationCreateRequest.class)
             .exchange()
             .expectStatus().isCreated()
-            .expectHeader().exists("Location");
+            .expectHeader().exists("Location")
+            .expectBody(StationApiResponse.class)
+            .returnResult();
     }
 }
