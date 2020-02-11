@@ -14,7 +14,7 @@ import java.util.Map;
 public class StationController {
 
     @PostMapping("")
-    public ResponseEntity<String> create() {
+    public ResponseEntity<String> createStations() {
 
         return ResponseEntity.created(URI.create("/stations")).build();
     }
